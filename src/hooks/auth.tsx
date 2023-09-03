@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LoginResponse } from "../types/hooks/auth";
+import { LoginResponse, RefreshTokenResponse } from "../types/hooks/auth";
 
 const handleResponseError = (error: any) => {
     if (error?.response?.data?.error) {
@@ -19,8 +19,10 @@ export const requestAuthLogin = async (username:string, password: string): Promi
     return data
 }
 
-export const requestRefreshToken =async (token: string): Promise<LoginResponse> => {
-    const data: LoginResponse = await axios
+export const requestRefreshToken =async (token: string): Promise<RefreshTokenResponse> => {
+    console.log( 'requestRefreshToken token : ' + token )
+    
+    const data: RefreshTokenResponse = await axios
         .post('http://localhost:4000/auth/refresh-token', {}, {
             headers: {
                 Authorization: `Bearer ${token}`

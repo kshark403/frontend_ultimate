@@ -51,10 +51,13 @@ const PrivateRoute = () => {
     const accessTokenExp = getExpFromToken(accessToken)
     const currentTimestamp = getCurrentTimestamp()
 
+    // video REST API with JWT #2 at 1:46:05
     const toDoRefreshToken = async () => {
         try {
             const data = await requestRefreshToken(accessToken)
-            setAccessToken(data.data!.accessToken)
+            console.log("new access token = " + data.accessToken)
+            
+            setAccessToken(data.accessToken)
             setIsLoggedIn(true)
             setUser(data)
         } catch( error ) {
